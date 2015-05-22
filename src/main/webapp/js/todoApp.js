@@ -2,10 +2,13 @@ var todoModule = angular.module("TodoApp", ["todoServices"]);
 
 todoModule.value("myValue", "Hallo myValue");
 
-todoModule.controller("TodoController", function(myValue, todoService) {
+todoModule.controller("TodoController", function(myValue, todoService, $http) {
     var me = this;
 
-    me.todos = todoService.getAll();
+    me.todos = [];
+    $http.get("http://localhost:8080/data/todo").success(function(todosFromServer) {
+        me.todos = todosFromServer;
+    });
 
     me.newTodo = {};
 
@@ -14,15 +17,19 @@ todoModule.controller("TodoController", function(myValue, todoService) {
     };
 
     me.addTodo = function() {
-        todoService.add(me.newTodo);
-        me.newTodo = {title : "", done: false};
-        console.log(myValue);
+        $http.post("http://localhost:8080/data/todo", me.newTodo)
+                .success(function (persistedTodo) {
+                    me.todos.push(persistedTodo);
+                    me.newTodo = {title : "", done: false};
+                }).error(function () {
+                    console.log("ERROR while writing todo!");
+                });
     }
 });
 
 var todoServices = angular.module("todoServices", []);
 
-todoServices.service("todoService", function() {
+todoServices.service("todoService", function($http) {
 
     var me = this;
     var idCounter = 1;
@@ -33,6 +40,7 @@ todoServices.service("todoService", function() {
     ];
 
     this.getAll =function() {
+
         return todos;
     };
 
