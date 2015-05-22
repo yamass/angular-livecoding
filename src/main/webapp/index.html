@@ -27,6 +27,7 @@
       </ul>
 
 
+      Remaining: {{vm.numberOfRemainingTodos()}} of {{vm.todos.length}}
 
    </div>
 </div>
@@ -37,9 +38,15 @@
    var todoModule = angular.module("TodoApp", []);
 
    todoModule.controller("TodoController", function() {
-      this.todos = [
+      var me = this;
+
+      me.todos = [
          {title: "Haircut", done: false},
          {title: "Milch und Brot kaufen", done: true}];
+
+      me.numberOfRemainingTodos = function() {
+         return me.todos.filter(function(todo) {return !todo.done;}).length;
+      }
    });
 </script>
 
