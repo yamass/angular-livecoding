@@ -16,9 +16,11 @@
     "url": "https://github.com/yamass/angular-livecoding/issues"
   },
   "homepage": "https://github.com/yamass/angular-livecoding",
-   "devDependencies": {
-      "gulp": "3.x",
-      "bower": "1.x",
-      "gulp-bower": "latest"
-   }
+  "devDependencies": {
+    "bower": "1.x",
+    "gulp": "3.x",
+    "gulp-bower": "latest",
+    "gulp-rename": "1.x",
+    "gulp-uglify": "1.x"
+  }
 }

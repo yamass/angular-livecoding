@@ -2,7 +2,7 @@ var todoModule = angular.module("TodoApp", ["todoServices"]);
 
 todoModule.value("myValue", "Hallo myValue");
 
-todoModule.controller("TodoController", function(myValue, todoResource, $http) {
+todoModule.controller("TodoController", ["myValue", "todoResource", "$http", function(myValue, todoResource, $http) {
     var me = this;
 
     me.todos = [];
@@ -23,10 +23,5 @@ todoModule.controller("TodoController", function(myValue, todoResource, $http) {
             console.log("ERROR while writing todo!");
         });
     }
-});
-
-var todoServices = angular.module("todoServices", ["ngResource"]);
-
-todoServices.factory('todoResource', ['$resource', function ($resource) {
-    return $resource('/data/todo/:id');
 }]);
+
