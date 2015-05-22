@@ -3,8 +3,29 @@
 <head lang="en">
    <meta charset="UTF-8">
    <title></title>
+   
+   <script src="lib/angular-1.4.0-rc.2/angular.js"></script>
 </head>
 <body>
-         asdfasdf
+
+
+<div ng-controller="TodoController as todoController">
+   {{todoController.greeting}}
+   <input ng-model="todoController.greeting">
+</div>
+
+
+<script>
+
+   var todoModule = angular.module("TodoApp", []);
+
+   todoModule.controller("TodoController", function() {
+      this.greeting = "Ey!";
+   });
+
+   angular.bootstrap(document, ['TodoApp']);
+
+</script>
+
 </body>
 </html>
