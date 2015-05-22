@@ -4,14 +4,11 @@
    <meta charset="UTF-8">
    <title></title>
 
-   <style>
-      .todo-done-true {
-         text-decoration: line-through;
-      }
-   </style>
+   <link rel="stylesheet" type="text/css" href="css/styles.css">
 
    <script src="lib/jquery.js"></script>
    <script src="lib/angular-1.4.0-rc.2/angular.js"></script>
+   <script src="js/todoApp.js"></script>
 </head>
 <body>
 
@@ -26,29 +23,17 @@
          </li>
       </ul>
 
-
       Remaining: {{vm.numberOfRemainingTodos()}} of {{vm.todos.length}}
+
+      <form name="addTodoForm" ng-submit="vm.addTodo()">
+         <input type="text" ng-model="vm.newTodo.title">
+         <input type="submit" value="Add">
+      </form>
 
    </div>
 </div>
 
 
-<script>
-
-   var todoModule = angular.module("TodoApp", []);
-
-   todoModule.controller("TodoController", function() {
-      var me = this;
-
-      me.todos = [
-         {title: "Haircut", done: false},
-         {title: "Milch und Brot kaufen", done: true}];
-
-      me.numberOfRemainingTodos = function() {
-         return me.todos.filter(function(todo) {return !todo.done;}).length;
-      }
-   });
-</script>
 
 </body>
 </html>
