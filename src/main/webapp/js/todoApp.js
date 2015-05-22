@@ -2,13 +2,12 @@ var todoModule = angular.module("TodoApp", ["todoServices"]);
 
 todoModule.value("myValue", "Hallo myValue");
 
-todoModule.controller("TodoController", function(myValue, todoService, $http) {
+todoModule.controller("TodoController", function(myValue, todoResource, $http) {
     var me = this;
 
     me.todos = [];
-    $http.get("http://localhost:8080/data/todo").success(function(todosFromServer) {
-        me.todos = todosFromServer;
-    });
+
+    me.todos = todoResource.query();
 
     me.newTodo = {};
 
@@ -17,36 +16,17 @@ todoModule.controller("TodoController", function(myValue, todoService, $http) {
     };
 
     me.addTodo = function() {
-        $http.post("http://localhost:8080/data/todo", me.newTodo)
-                .success(function (persistedTodo) {
-                    me.todos.push(persistedTodo);
-                    me.newTodo = {title : "", done: false};
-                }).error(function () {
-                    console.log("ERROR while writing todo!");
-                });
+        todoResource.save(me.newTodo, function (persistedTodo) {
+            me.todos.push(persistedTodo);
+            me.newTodo = {title : "", done: false};
+        }, function (httpResponse) {
+            console.log("ERROR while writing todo!");
+        });
     }
 });
 
-var todoServices = angular.module("todoServices", []);
+var todoServices = angular.module("todoServices", ["ngResource"]);
 
-todoServices.service("todoService", function($http) {
-
-    var me = this;
-    var idCounter = 1;
-
-    var todos = [
-        {title: "Haircut", done: false},
-        {title: "Milch und Brot kaufen", done: true}
-    ];
-
-    this.getAll =function() {
-
-        return todos;
-    };
-
-    this.add = function(todo) {
-        todos.push(todo);
-        todo.id = idCounter++;
-        return todo;
-    }
-});
+todoServices.factory('todoResource', ['$resource', function ($resource) {
+    return $resource('/data/todo/:id');
+}]);
