@@ -1,4 +1,4 @@
-var todoModule = angular.module("TodoApp", []);
+var todoModule = angular.module("TodoApp", ["todoServices"]);
 
 todoModule.value("myValue", "Hallo myValue");
 
@@ -20,7 +20,9 @@ todoModule.controller("TodoController", function(myValue, todoService) {
     }
 });
 
-todoModule.service("todoService", function() {
+var todoServices = angular.module("todoServices", []);
+
+todoServices.service("todoService", function() {
 
     var me = this;
     var idCounter = 1;
