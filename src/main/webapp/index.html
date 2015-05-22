@@ -3,7 +3,13 @@
 <head lang="en">
    <meta charset="UTF-8">
    <title></title>
-   
+
+   <style>
+      .todo-done-true {
+         text-decoration: line-through;
+      }
+   </style>
+
    <script src="lib/jquery.js"></script>
    <script src="lib/angular-1.4.0-rc.2/angular.js"></script>
 </head>
@@ -11,9 +17,17 @@
 
 
 <div  >
-   <div ng-controller="TodoController as todoController">
-      {{todoController.greeting}}
-      <input ng-model="todoController.greeting">
+   <div ng-controller="TodoController as vm">
+
+      <ul>
+         <li ng-repeat="todo in vm.todos">
+            <input type="checkbox" ng-model="todo.done">
+            <span class="todo-done-{{todo.done}}">{{todo.title}}</span>
+         </li>
+      </ul>
+
+
+
    </div>
 </div>
 
@@ -23,7 +37,9 @@
    var todoModule = angular.module("TodoApp", []);
 
    todoModule.controller("TodoController", function() {
-      this.greeting = "Ey!";
+      this.todos = [
+         {title: "Haircut", done: false},
+         {title: "Milch und Brot kaufen", done: true}];
    });
 </script>
 
