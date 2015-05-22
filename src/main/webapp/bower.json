@@ -1,0 +1,15 @@
+{
+  "name": "angular-livecoding",
+  "version": "0.0.0",
+  "homepage": "https://github.com/yamass/angular-livecoding",
+  "authors": [
+    "Yann"
+  ],
+  "license": "MIT" ,
+
+   "dependencies": {
+      "angular":"1.x",
+      "angular-resource":"1.x",
+      "jquery": "1.x"
+   }
+}

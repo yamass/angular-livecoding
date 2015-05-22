@@ -1,0 +1,24 @@
+{
+  "name": "angular-todo",
+  "version": "0.0.1",
+  "description": "blah",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamass/angular-livecoding.git"
+  },
+  "author": "Yann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yamass/angular-livecoding/issues"
+  },
+  "homepage": "https://github.com/yamass/angular-livecoding",
+   "devDependencies": {
+      "gulp": "3.x",
+      "bower": "1.x",
+      "gulp-bower": "latest"
+   }
+}
