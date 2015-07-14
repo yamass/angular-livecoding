@@ -21,6 +21,10 @@ public class TodoService {
     private static AtomicInteger idCounter = new AtomicInteger(1);
 
     public TodoService() {
+        Todo todo = new Todo();
+        todo.setId(123);
+        todo.setTitle("blah");
+        todos.put(123, todo);
     }
 
     @RequestMapping(method = RequestMethod.GET)

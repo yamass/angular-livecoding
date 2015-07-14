@@ -1,4 +1,9 @@
 
+### Web stuff
+node/
+node_modules/
+bower_components/
+
 ### Java
 *.class
 
